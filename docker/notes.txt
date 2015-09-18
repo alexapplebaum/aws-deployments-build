@@ -30,9 +30,9 @@ ebfb497ecf80f43a4c4dba7bcac6ce9d7a4ed0a03f5e8c78d9cda4b483f355d5
 
 
 Finally, uploading image to dockerhub
- 
+ex. 
 (venv)vagrant@demo:~/docker$ sudo docker push f5networks/demo:latest
-The push refers to a repository [smoothalg/f5demo] (len: 1)
+The push refers to a repository [f5networks/demo] (len: 1)
 Sending image list
 Pushing repository smoothalg/f5demo (1 tags)
 83e4dde6b9cf: Image already pushed, skipping
