@@ -1,0 +1,47 @@
+MISC DOCKER NOTES:
+Should really leverage packer
+
+INSTALL DOCKER ON UBUNTU:
+sudo apt-get -y install docker.io
+sudo ln -sf /usr/bin/docker.io /usr/local/bin/docker
+sudo sed -i '$acomplete -F _docker docker' /etc/bash_completion.d/docker.io
+
+
+BUILD DOCKER IMAGE:
+sudo docker build -t f5demo .
+sudo docker build --no-cache=true -t f5demo .
+sudo docker run -v /aws-deployments:/aws-deployments -i -t f5demo
+root@d379689cb9e1:/# exit
+
+COMMIT & UPLOAD DOCKER BUILD TO DOCKER HUB:
+#https://docs.docker.com/reference/commandline/commit/
+
+Login (fill in prompts):
+
+docker login
+
+#Commit to both version number and "latest" tags.
+ex.
+sudo docker commit -m "Added python 2.7.9 & virtenv to ubuntu 14.04.2-server" -a "smoothalg" d379689cb9e1 f5networks/demo:latest
+ebfb497ecf80f43a4c4dba7bcac6ce9d7a4ed0a03f5e8c78d9cda4b483f35352
+
+sudo docker commit -m "Added python 2.7.9 & virtenv to ubuntu 14.04.2-server" -a "smoothalg" d379689cb9e1 f5networks/demo:0.0.1
+ebfb497ecf80f43a4c4dba7bcac6ce9d7a4ed0a03f5e8c78d9cda4b483f355d5
+
+
+Finally, uploading image to dockerhub
+ 
+(venv)vagrant@demo:~/docker$ sudo docker push f5networks/demo:latest
+The push refers to a repository [smoothalg/f5demo] (len: 1)
+Sending image list
+Pushing repository smoothalg/f5demo (1 tags)
+83e4dde6b9cf: Image already pushed, skipping
+b670fb0c7ecd: Image already pushed, skipping
+29460ac93442: Image already pushed, skipping
+d2a0ecffe6fa: Image already pushed, skipping
+c1d85c6d2e53: Image successfully pushed
+7a53c503a377: Image successfully pushed
+20cc0a943891: Image successfully pushed
+4ac5dfe8ae98: Image successfully pushed
+ebfb497ecf80: Image successfully pushed
+Pushing tag for rev [ebfb497ecf80] on {https://cdn-registry-1.docker.io/v1/repositories/f5networks/demo/tags/latest}

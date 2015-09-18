@@ -1,0 +1,26 @@
+# This directory contains some build scripts used to create/update the f5networks/demo vagrant image
+
+# To build the image from scratch, first launch a stock Vagrant Ubuntu 14.04 LTS base image
+# https://docs.vagrantup.com/v2/getting-started/boxes.html
+vagrant box add ubuntu/trusty64
+vagrant up
+vagrant ssh
+
+# When logged on to the base Ubuntu base image, add aws-deployments specific packages
+./install_python.sh
+./bootstrap.sh
+
+# To Update the image:
+# Launch the new base "f5networks/demo" image with Vagrant file contained in this directory
+vagrant up 
+# Make additional changes
+# Clear out bash_history, sanitize, etc.
+
+vagrant halt
+
+# Upload/Share image 
+# https://docs.vagrantup.com/v2/getting-started/share.html
+or through webportal 
+# https://atlas.hashicorp.com/f5networks/boxes/demo
+
+
